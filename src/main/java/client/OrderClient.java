@@ -9,7 +9,17 @@ public class OrderClient extends RestClient {
 
     private static final String ORDERS_PATH = "api/orders";
 
-    public ValidatableResponse create(Order order) {
+    public ValidatableResponse createOrderWithAuthorization(String accessToken, Order order) {
+        return given()
+                .spec(getBaseSpec())
+                .header("authorization", accessToken)
+                .body(order)
+                .when()
+                .post(ORDERS_PATH)
+                .then();
+    }
+
+    public ValidatableResponse createOrderWithoutAuthorization(Order order) {
         return given()
                 .spec(getBaseSpec())
                 .body(order)
