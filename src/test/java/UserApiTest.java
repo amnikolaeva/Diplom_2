@@ -34,7 +34,6 @@ public class UserApiTest {
     @Test
     @DisplayName("Тест на создание пользователя")
     public void userCanBeCreated() {
-
         userClient.create(user)
                 .statusCode(200)
                 .body("success", equalTo(true));
@@ -43,13 +42,11 @@ public class UserApiTest {
                 .statusCode(200)
                 .body("accessToken", notNullValue())
                 .extract().path("accessToken");
-
     }
 
     @Test
     @DisplayName("Тест на создание уже зарегистрированного пользователя")
     public void userAlreadyRegistered() {
-
         userClient.create(user)
                 .statusCode(200)
                 .body("success", equalTo(true));
