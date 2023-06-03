@@ -1,5 +1,6 @@
 import client.UserClient;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import model.User;
 import model.UserCredentials;
@@ -32,6 +33,7 @@ public class ChangeInfoApiTest {
     }
 
     @Test
+    @DisplayName("Тест на изменение email с авторизацией")
     public void changeEmailWithAuthorization() {
         accessToken = userClient.login(UserCredentials.from(user))
                 .statusCode(200)
@@ -45,6 +47,7 @@ public class ChangeInfoApiTest {
     }
 
     @Test
+    @DisplayName("Тест на изменение пароля с авторизацией")
     public void changePasswordWithAuthorization() {
         accessToken = userClient.login(UserCredentials.from(user))
                 .statusCode(200)
@@ -58,6 +61,7 @@ public class ChangeInfoApiTest {
     }
 
     @Test
+    @DisplayName("Тест на изменение имени с авторизацией")
     public void changeNameWithAuthorization() {
         accessToken = userClient.login(UserCredentials.from(user))
                 .statusCode(200)
@@ -71,6 +75,7 @@ public class ChangeInfoApiTest {
     }
 
     @Test
+    @DisplayName("Тест на изменение email без авторизации ")
     public void changeEmailWithoutAuthorization() {
         accessToken = userClient.login(UserCredentials.from(user))
                 .statusCode(200)

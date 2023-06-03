@@ -1,5 +1,6 @@
 import client.UserClient;
 import generator.UserGenerator;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import model.User;
 import model.UserCredentials;
@@ -31,6 +32,7 @@ public class LoginApiTest {
     }
 
     @Test
+    @DisplayName("Тест на авторизацию пользователя")
     public void userCanBeLogin() {
         userClient.create(user);
         accessToken = userClient.login(UserCredentials.from(user))
@@ -41,6 +43,7 @@ public class LoginApiTest {
     }
 
     @Test
+    @DisplayName("Тест на авторизацию пользователя с некорректным паролем")
     public void userLoginWithIncorrectPassword() {
         user.setPassword(null);
         userClient.create(user);
