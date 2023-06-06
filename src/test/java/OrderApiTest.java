@@ -33,6 +33,7 @@ public class OrderApiTest {
                 .statusCode(200)
                 .body("success", equalTo(true))
                 .body("order", notNullValue());
+        userClient.delete(accessToken, UserCredentials.from(user));
     }
 
     @Test

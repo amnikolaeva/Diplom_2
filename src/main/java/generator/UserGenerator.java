@@ -16,6 +16,4 @@ public class UserGenerator {
                 .build();
         return user;
     }
-
-
 }

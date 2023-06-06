@@ -17,11 +17,12 @@ public class LoginApiTest {
     private User user;
     private String accessToken;
 
+    private static final String INCORRECT_PASSWORD = "1";
+
     @Before
     public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandom();
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
 
     @After
@@ -45,8 +46,7 @@ public class LoginApiTest {
     @Test
     @DisplayName("Тест на авторизацию пользователя с некорректным паролем")
     public void userLoginWithIncorrectPassword() {
-        user.setPassword(null);
-        userClient.create(user);
+        user.setPassword(INCORRECT_PASSWORD);
         accessToken = userClient.login(UserCredentials.from(user))
                 .statusCode(401)
                 .body("success", equalTo(false))

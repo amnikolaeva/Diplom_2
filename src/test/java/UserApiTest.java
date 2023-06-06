@@ -2,6 +2,9 @@ import client.UserClient;
 import generator.UserGenerator;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.response.ValidatableResponseOptions;
 import model.UserCredentials;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +24,6 @@ public class UserApiTest {
     public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandom();
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
     }
 
     @After
@@ -51,6 +53,9 @@ public class UserApiTest {
                 .statusCode(200)
                 .body("success", equalTo(true));
 
+        accessToken = userClient.login(UserCredentials.from(user))
+                .extract().path("accessToken");
+
         userClient.create(user)
                 .statusCode(403)
                 .body("success", equalTo(false))
@@ -64,5 +69,7 @@ public class UserApiTest {
         userClient.create(user)
                 .statusCode(403)
                 .body("message", equalTo("Email, password and name are required fields"));
+        accessToken = userClient.login(UserCredentials.from(user))
+                .extract().path("accessToken");
     }
 }

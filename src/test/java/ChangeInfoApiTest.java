@@ -17,11 +17,14 @@ public class ChangeInfoApiTest {
     private User user;
     private String accessToken;
 
+    private static final String CHANGED_EMAIL = "email124789237504932562043875";
+    private static final String CHANGED_PASSWORD = "password124789237504932562043875";
+    private static final String CHANGED_NAME = "name124789237504932562043875";
+
     @Before
     public void setUp() {
         userClient = new UserClient();
         user = UserGenerator.getRandom();
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
         userClient.create(user);
     }
 
@@ -40,7 +43,7 @@ public class ChangeInfoApiTest {
                 .body("accessToken", notNullValue())
                 .extract().path("accessToken");
 
-        user.setEmail("email124789237504932562043875");
+        user.setEmail(CHANGED_EMAIL);
         userClient.changeInfo(accessToken, UserCredentials.from(user))
                 .statusCode(200)
                 .body("success", equalTo(true));
@@ -54,7 +57,7 @@ public class ChangeInfoApiTest {
                 .body("accessToken", notNullValue())
                 .extract().path("accessToken");
 
-        user.setPassword("password124789237504932562043875");
+        user.setPassword(CHANGED_PASSWORD);
         userClient.changeInfo(accessToken, UserCredentials.from(user))
                 .statusCode(200)
                 .body("success", equalTo(true));
@@ -68,7 +71,7 @@ public class ChangeInfoApiTest {
                 .body("accessToken", notNullValue())
                 .extract().path("accessToken");
 
-        user.setName("name124789237504932562043875");
+        user.setName(CHANGED_NAME);
         userClient.changeInfo(accessToken, UserCredentials.from(user))
                 .statusCode(200)
                 .body("success", equalTo(true));

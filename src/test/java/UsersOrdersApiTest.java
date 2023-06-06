@@ -8,8 +8,8 @@ import model.UserCredentials;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.empty;
 
 public class UsersOrdersApiTest {
 
@@ -49,6 +49,6 @@ public class UsersOrdersApiTest {
         orderClient.getOrdersWithAuthorization(accessToken)
                 .statusCode(200)
                 .body("success", equalTo(true))
-                .body("orders", notNullValue());
+                .body("order", not(empty()));
     }
 }
