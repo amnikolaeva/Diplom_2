@@ -40,7 +40,6 @@ public class UsersOrdersApiTest {
     public void getUsersOrdersWithAuthorization() {
         userClient = new UserClient();
         user = UserGenerator.getRandom();
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site/";
         userClient.create(user);
         accessToken = userClient.login(UserCredentials.from(user))
                 .body("accessToken", notNullValue())

@@ -42,8 +42,6 @@ public class OrderApiTest {
         orderClient = new OrderClient();
         userClient = new UserClient();
         order = OrderGenerator.getOrder();
-        user = UserGenerator.getRandom();
-        userClient.create(user);
         orderClient.createOrderWithoutAuthorization(order)
                 .statusCode(200)
                 .body("success", equalTo(true))
